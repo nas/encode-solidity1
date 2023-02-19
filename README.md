@@ -7,3 +7,4 @@ Please add your test account addresses that we can use to test contracts.
 
 - Nas - 0xfC31fa86f6320679Bc18ad98f110A391dbDCc50d
 - August - 0xa82C37538661bE12238Ab74930475C009c69824B
+- Ali - 0xb402E6065224A833a449431ad5f3F1040A9F16e0
