@@ -6,3 +6,4 @@ Please add your test account addresses that we can use to test contracts.
 **Accounts**:
 
 - Nas - 0xfC31fa86f6320679Bc18ad98f110A391dbDCc50d
+- August - 0xa82C37538661bE12238Ab74930475C009c69824B
