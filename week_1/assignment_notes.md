@@ -14,3 +14,5 @@ address: 0x64425d86f7d097DA0d4f68B6C5aec29014B2Db40
 txnHash: 0x6614cedb4b466902f1ddf9b618fbce3e03d5ff52a50b95020d4003fc1feee6bf
 address: 0xE1cFD5712Aa430361D0952C2476f996c155ccCf6
 
+### Gdoc with details
+https://docs.google.com/spreadsheets/d/1gr5K60Y-QEthM7hZzpNMBT0I72NDCsYWzyWuGiIxy5Y
