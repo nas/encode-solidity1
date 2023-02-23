@@ -119,26 +119,43 @@ describe("Ballot", () => {
       });
     });
 
-    // describe("when the an attacker interact with the giveRightToVote function in the contract", function () {
-    //   // TODO
-    //   it("should revert", async () => {
-    //     throw Error("Not implemented");
-    //   });
-    // });
+    describe("when the an attacker interact with the giveRightToVote function in the contract", function () {
+      it("should revert", async () => {
+        const notChairperson = signers[1];
+        await expect(
+          ballotContract
+            .connect(notChairperson)
+            .giveRightToVote(signers[2].address)
+        ).to.be.revertedWith("Only chairperson can give right to vote.");
+      });
+    });
 
-    // describe("when the an attacker interact with the vote function in the contract", function () {
-    //   // TODO
-    //   it("should revert", async () => {
-    //     throw Error("Not implemented");
-    //   });
-    // });
+    describe("when the an attacker interact with the vote function in the contract", function () {
+      it("should revert", async () => {
+        await expect(
+          ballotContract.connect(signers[1]).vote(0)
+        ).to.be.revertedWith("Has no right to vote.");
+      });
+    });
 
-    // describe("when the an attacker interact with the delegate function in the contract", function () {
-    //   // TODO
-    //   it("should revert", async () => {
-    //     throw Error("Not implemented");
-    //   });
-    // });
+    describe("when the an attacker interact with the delegate function in the contract", function () {
+      it("should revert", async () => {
+        const newVoter = signers[1];
+        await expect(
+          ballotContract.connect(newVoter).vote(0)
+        ).to.be.revertedWith("Has no right to vote.");
+
+        await ballotContract.giveRightToVote(newVoter.address);
+        await expect(
+          ballotContract.connect(newVoter).delegate(newVoter.address)
+        ).to.be.revertedWith("Self-delegation is disallowed.");
+
+        await ballotContract.connect(newVoter).vote(0);
+        await expect(
+          ballotContract.connect(newVoter).delegate(chairperson)
+        ).to.be.revertedWith("You already voted.");
+      });
+    });
 
     // describe("when someone interact with the winningProposal function before any votes are cast", function () {
     //   // TODO
