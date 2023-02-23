@@ -157,39 +157,59 @@ describe("Ballot", () => {
       });
     });
 
-    // describe("when someone interact with the winningProposal function before any votes are cast", function () {
-    //   // TODO
-    //   it("should return 0", async () => {
-    //     throw Error("Not implemented");
-    //   });
-    // });
+    describe("when someone interact with the winningProposal function before any votes are cast", function () {
+      it("should return 0", async () => {
+        expect(await ballotContract.winningProposal()).to.eq(0);
+      });
+    });
 
-    // describe("when someone interact with the winningProposal function after one vote is cast for the first proposal", function () {
-    //   // TODO
-    //   it("should return 0", async () => {
-    //     throw Error("Not implemented");
-    //   });
-    // });
+    describe("when someone interact with the winningProposal function after one vote is cast for the first proposal", function () {
+      it("should return 1", async () => {
+        expect(await ballotContract.winningProposal()).to.eq(0);
 
-    // describe("when someone interact with the winnerName function before any votes are cast", function () {
-    //   // TODO
-    //   it("should return name of proposal 0", async () => {
-    //     throw Error("Not implemented");
-    //   });
-    // });
+        await ballotContract.vote(0);
 
-    // describe("when someone interact with the winnerName function after one vote is cast for the first proposal", function () {
-    //   // TODO
-    //   it("should return name of proposal 0", async () => {
-    //     throw Error("Not implemented");
-    //   });
-    // });
+        expect(await ballotContract.winningProposal()).to.eq(0);
+      });
+    });
 
-    // describe("when someone interact with the winningProposal function and winnerName after 5 random votes are cast for the proposals", function () {
-    //   // TODO
-    //   it("should return the name of the winner proposal", async () => {
-    //     throw Error("Not implemented");
-    //   });
-    // });
+    describe("when someone interact with the winnerName function before any votes are cast", function () {
+      it("should return name of proposal 0", async () => {
+        const name = ethers.utils.parseBytes32String(
+          await ballotContract.winnerName()
+        );
+        expect(name).to.eq("Proposal_1");
+      });
+    });
+
+    describe("when someone interact with the winnerName function after one vote is cast for the first proposal", function () {
+      it("should return name of proposal 0", async () => {
+        await ballotContract.vote(0);
+
+        const name = ethers.utils.parseBytes32String(
+          await ballotContract.winnerName()
+        );
+        expect(name).to.eq("Proposal_1");
+      });
+    });
+
+    describe("when someone interact with the winningProposal function and winnerName after 5 random votes are cast for the proposals", function () {
+      it("should return the name of the winner proposal", async () => {
+        await ballotContract.vote(0);
+        await ballotContract.giveRightToVote(signers[1].address);
+        await ballotContract.connect(signers[1]).vote(2);
+        await ballotContract.giveRightToVote(signers[2].address);
+        await ballotContract.connect(signers[2]).vote(2);
+        await ballotContract.giveRightToVote(signers[3].address);
+        await ballotContract.connect(signers[3]).vote(1);
+        await ballotContract.giveRightToVote(signers[4].address);
+        await ballotContract.connect(signers[4]).vote(2);
+
+        const name = ethers.utils.parseBytes32String(
+          await ballotContract.winnerName()
+        );
+        expect(name).to.eq("Proposal_3");
+      });
+    });
   });
 });
