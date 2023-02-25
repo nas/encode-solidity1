@@ -1,15 +1,20 @@
 {
-  "name": "encode-project",
+  "name": "encode-ballot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
-    "hardhat": "^2.12.7"
+    "dotenv": "^16.0.3",
+    "hardhat": "^2.12.7",
+    "onchange": "^7.1.0",
+    "prettier": "^2.8.4",
+    "ts-node": "^10.9.1"
   }
 }

@@ -8,5 +8,5 @@
     "skipLibCheck": true
   },
   "include": ["./scripts", "./tests", "./typechain-types"],
-  "files": ["./hardhat.config.ts"],
+  "files": ["./hardhat.config.ts"]
 }
