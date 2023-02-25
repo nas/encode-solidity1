@@ -1,0 +1,1 @@
+// add your script to read various information from Ballot contract
