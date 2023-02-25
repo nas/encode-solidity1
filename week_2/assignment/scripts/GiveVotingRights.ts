@@ -24,9 +24,8 @@ async function main() {
   let ballotContract: Ballot;
   const ballotContractFactory = new Ballot__factory(signer);
 
-  ballotContract = ballotContractFactory.attach(
-    "0x9A67DF050425C5083E95D8CaF781f5101f8CCe5F"
-  );
+  ballotContract = ballotContractFactory.attach(process.env.CONTRACT_ADDRESS as string)
+  // pick the contract address from the spreadsheet and add it to your .env file
 
   // Now give the voting rights here
 
