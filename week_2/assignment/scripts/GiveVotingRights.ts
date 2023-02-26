@@ -17,7 +17,7 @@ async function main() {
   );
 
   const wallet = ethers.Wallet.fromMnemonic(mnemonic);
-  console.log(`Connected to the wallet address ${wallet}`);
+  console.log(`Connected to the wallet address ${wallet.address}`);
 
   const signer = wallet.connect(provider);
 
@@ -27,7 +27,10 @@ async function main() {
   ballotContract = ballotContractFactory.attach(process.env.CONTRACT_ADDRESS as string)
   // pick the contract address from the spreadsheet and add it to your .env file
 
+  console.log(await ballotContract.address)
   // Now give the voting rights here
+
+  const f = await ballotContract.giveRightToVote("0xa82C37538661bE12238Ab74930475C009c69824B")
 
 }
 
