@@ -7,16 +7,22 @@ dotenv.config();
 
 async function main() {
 
-  const mnemonic = process.env.MNEMONIC;
-  if (!mnemonic || mnemonic?.length <= 0)
-    throw new Error("Missing env: Menomic seed");
+  const args = process.argv
+  const address = args.slice(2)[0];
+
+  if (!address)
+    throw new Error("Missing address parameter for voting rights");
+  
+  const privateKey = process.env.PRIVATE_KEY;
+  if (!privateKey || privateKey?.length <= 0)
+    throw new Error("Missing env: Private Key");
 
   const provider = new ethers.providers.EtherscanProvider(
     "goerli",
     process.env.ETHERSCAN_API_KEY
   );
 
-  const wallet = ethers.Wallet.fromMnemonic(mnemonic);
+  const wallet = new ethers.Wallet(privateKey);
   console.log(`Connected to the wallet address ${wallet.address}`);
 
   const signer = wallet.connect(provider);
@@ -30,7 +36,8 @@ async function main() {
   console.log(await ballotContract.address)
   // Now give the voting rights here
 
-  const f = await ballotContract.giveRightToVote("0xa82C37538661bE12238Ab74930475C009c69824B")
+  const f = await ballotContract.giveRightToVote(address)
+  console.log(f)
 
 }
 
