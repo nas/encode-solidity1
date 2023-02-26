@@ -9,3 +9,4 @@ Please add your test account addresses that we can use to test contracts.
 - August - 0xa82C37538661bE12238Ab74930475C009c69824B
 - Ali - 0xb402E6065224A833a449431ad5f3F1040A9F16e0
 - Patrick - 0x8d7a68FBd832D321b02b71F3f8c4d5dd642905aA
+- Angela - 0xd54FF94FC8cdD1A9004CAda5a7F9AD644ccc9A89
