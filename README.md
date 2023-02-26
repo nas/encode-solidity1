@@ -8,4 +8,4 @@ Please add your test account addresses that we can use to test contracts.
 - Nas - 0x3391fA9045bBb346344a5EC39F89746Ae15a5820
 - August - 0xa82C37538661bE12238Ab74930475C009c69824B
 - Ali - 0xb402E6065224A833a449431ad5f3F1040A9F16e0
-- Patrick - 0x659213deb839f08ea0bf3ca2352d333746871207
+- Patrick - 0x8d7a68FBd832D321b02b71F3f8c4d5dd642905aA
