@@ -26,12 +26,13 @@ async function main() {
     // pick the contract address from the spreadsheet and add it to your .env file
     ballotContract = ballotContractFactory.attach(process.env.CONTRACT_ADDRESS as string)
 
-    // Now delegate vote to someone on the team
-    await ballotContract.delegate("0x3391fA9045bBb346344a5EC39F89746Ae15a5820");
+
 
     // Now cast vote and pass in the proposals array index.
-    // This will give an error: Already voted, because my vote is delegated to someone else [line 30].
     await ballotContract.vote(0);
+    
+    // Now delegate vote to someone on the team
+    await ballotContract.delegate("0x3391fA9045bBb346344a5EC39F89746Ae15a5820");
 }
 
 main().catch((error) => {
