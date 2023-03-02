@@ -58,7 +58,7 @@ describe("NFT Shop", async () => {
     await giveNFTMintRoleTx.wait();
   });
 
-  describe.only("When the Shop contract is deployed", async () => {
+  describe("When the Shop contract is deployed", async () => {
     it("defines the ratio as provided in parameters", async () => {
       const ratio = await tokenSaleContract.ratio();
       expect(ratio).to.eq(TEST_TOKEN_RATIO);
@@ -77,7 +77,7 @@ describe("NFT Shop", async () => {
     });
   });
 
-  describe.only("When a user purchase an ERC20 from the Token contract", async () => {
+  describe("When a user purchase an ERC20 from the Token contract", async () => {
     let tokenBalanceBeforeMint: BigNumber;
     let ethBalanceBeforeMint: BigNumber;
     let mintTxGasCost: BigNumber;
