@@ -156,11 +156,12 @@ describe("NFT Shop", async () => {
 
       describe("When a user purchases a NFT from the Shop contract", async () => {
         let tokenBalanceBeforeBuyingNFT: BigNumber;
+        let tokenBalanceAfterBuyingNFT: BigNumber;
         beforeEach(async () => {
           tokenBalanceBeforeBuyingNFT = await tokenContract.balanceOf(
             account1.address
           );
-          const allowTx = await tokenContract
+          await tokenContract
             .connect(account1)
             .approve(tokenSaleContract.address, TEST_TOKEN_PRICE);
           const buyTx = await tokenSaleContract
@@ -170,7 +171,7 @@ describe("NFT Shop", async () => {
         });
 
         it("charges the correct amount of ERC20 tokens", async () => {
-          const tokenBalanceAfterBuyingNFT = await tokenContract.balanceOf(
+          tokenBalanceAfterBuyingNFT = await tokenContract.balanceOf(
             account1.address
           );
           const diff = tokenBalanceBeforeBuyingNFT.sub(
@@ -190,25 +191,35 @@ describe("NFT Shop", async () => {
           expect(withdrawableAmount).to.eq(TEST_TOKEN_PRICE.div(2));
         });
 
-        // it("update the public pool account correctly", async () => {
-        //   throw new Error("Not implemented");
-        // });
+        describe("When a user burns their NFT at the Shop contract", async () => {
+          let tokenBalanceAfterBurningNFT: BigNumber;
+          beforeEach(async () => {
+            tokenBalanceAfterBuyingNFT = await tokenContract.balanceOf(
+              account1.address
+            );
 
-        // it("favors the public pool with the rounding", async () => {
-        //   throw new Error("Not implemented");
-        // });
+            await nftContract
+              .connect(account1)
+              .approve(tokenSaleContract.address, TEST_NFT_ID);
+            const burnTx = await tokenSaleContract
+              .connect(account1)
+              .burnNFT(TEST_NFT_ID);
+            await burnTx.wait();
+
+            tokenBalanceAfterBurningNFT = await tokenContract.balanceOf(
+              account1.address
+            );
+          });
+
+          it("gives the correct amount of ERC20 tokens", async () => {
+            expect(tokenBalanceAfterBurningNFT).to.eq(
+              tokenBalanceBeforeBuyingNFT.sub(TEST_TOKEN_PRICE.div(2))
+            );
+          });
+        });
       });
     });
   });
-
-  // describe("When a user burns their NFT at the Shop contract", async () => {
-  //   it("gives the correct amount of ERC20 tokens", async () => {
-  //     throw new Error("Not implemented");
-  //   });
-  //   it("updates the public pool correctly", async () => {
-  //     throw new Error("Not implemented");
-  //   });
-  // });
 
   // describe("When the owner withdraw from the Shop contract", async () => {
   //   it("recovers the right amount of ERC20 tokens", async () => {
