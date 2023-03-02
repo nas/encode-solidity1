@@ -10,3 +10,4 @@ Please add your test account addresses that we can use to test contracts.
 - Ali - 0xb402E6065224A833a449431ad5f3F1040A9F16e0
 - Patrick - 0x8d7a68FBd832D321b02b71F3f8c4d5dd642905aA
 - Angela - 0xd54FF94FC8cdD1A9004CAda5a7F9AD644ccc9A89
+- Zach - 0x22372DF9f4b8CCf0a3A7f6beeb2042576C3C6D4A
