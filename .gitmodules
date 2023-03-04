@@ -1,0 +1,3 @@
+[submodule "week_3/encode-club-week3-project"]
+	path = week_3/encode-club-week3-project
+	url = https://github.com/augustweinbren/encode-club-week3-project.git
