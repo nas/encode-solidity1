@@ -66,6 +66,20 @@ contract Ballot {
         voters[voter].weight = 1;
     }
 
+    // Re-delegate the chairperson
+    function redelegateChairperson(address newChair) external {
+        require(
+            msg.sender == chairperson,
+            "Only chairperson can re-delegate the chairperson"
+        );
+        require(
+            newChair != msg.sender,
+            "The chair cannot re-appoint themselves."
+        );
+
+        chairperson = newChair;
+    }
+
     /// Delegate your vote to the voter `to`.
     function delegate(address to) external {
         // assigns reference
