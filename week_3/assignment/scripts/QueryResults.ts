@@ -3,8 +3,6 @@ import { Ballot__factory } from "../typechain-types";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-
-
 async function main() {
   const args = process.argv;
   const proposals = args.slice(2);
@@ -40,6 +38,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-
-
-// script for querying tokenized ballot results
