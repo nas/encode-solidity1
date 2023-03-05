@@ -3,4 +3,5 @@
 /* eslint-disable */
 import type * as erc20VotesSol from "./ERC20Votes.sol";
 export type { erc20VotesSol };
-export type { MyToken } from "./MyToken";
+import type * as tokenizedBalletSol from "./TokenizedBallet.sol";
+export type { tokenizedBalletSol };

@@ -19,8 +19,11 @@ const MINT_VALUE = ethers.utils.parseEther("10");
 // 6. scripts/QueryResults.ts
 
 async function main() {
+  const args = process.argv;
+  const userAddress = args.slice(2);
   //Deploy contract
-  const [deployer, account1, account2] = await ethers.getSigners();
+  // TODO: addresses
+  
   const contractFactory = new MyToken__factory(deployer);
   const contract = await contractFactory.deploy();
   const deployTransactionReceipt = await contract.deployTransaction.wait();

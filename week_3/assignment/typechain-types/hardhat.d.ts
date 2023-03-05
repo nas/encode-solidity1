@@ -61,9 +61,13 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MyToken__factory>;
     getContractFactory(
-      name: "MyToken",
+      name: "Ballot",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MyToken__factory>;
+    ): Promise<Contracts.Ballot__factory>;
+    getContractFactory(
+      name: "IMyToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IMyToken__factory>;
 
     getContractAt(
       name: "AccessControl",
@@ -126,10 +130,15 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MyToken>;
     getContractAt(
-      name: "MyToken",
+      name: "Ballot",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.MyToken>;
+    ): Promise<Contracts.Ballot>;
+    getContractAt(
+      name: "IMyToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IMyToken>;
 
     // default types
     getContractFactory(
