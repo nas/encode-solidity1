@@ -1,7 +1,9 @@
 import { ethers } from "ethers";
 import { MyToken, MyToken__factory } from "../typechain-types";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const MINT_VALUE = ethers.utils.parseEther("1");
+const MINT_VALUE = ethers.utils.parseEther("10");
   const VOTERS_KEYS = [
     "0x3391fA9045bBb346344a5EC39F89746Ae15a5820",
     "0xa82C37538661bE12238Ab74930475C009c69824B",
