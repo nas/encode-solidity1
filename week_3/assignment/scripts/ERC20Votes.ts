@@ -24,6 +24,7 @@ async function main() {
   //Deploy contract
   // TODO: addresses
   
+  const [deployer, account1, account2] = await ethers.getSigners();
   const contractFactory = new MyToken__factory(deployer);
   const contract = await contractFactory.deploy();
   const deployTransactionReceipt = await contract.deployTransaction.wait();
