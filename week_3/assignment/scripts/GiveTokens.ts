@@ -32,10 +32,10 @@ async function main() {
   console.log("Minting new tokens for all");
   const mintingContractFactory = new MyToken__factory(signer);
   
-  // mintingContract = await mintingContractFactory.attach(process.env.CONTRACT_ADDRESS as string)
-  const mintingContract = await mintingContractFactory.deploy();
-  const deployTransactionReceipt = await mintingContract.deployTransaction.wait();
-  console.log(`minting contract deployed at: ${deployTransactionReceipt.blockNumber}`)
+  const mintingContract = await mintingContractFactory.attach(process.env.CONTRACT_ADDRESS as string)
+  // const mintingContract = await mintingContractFactory.deploy();
+  // const deployTransactionReceipt = await mintingContract.deployTransaction.wait();
+  // console.log(`minting contract deployed at: ${deployTransactionReceipt.blockNumber}`)
   for (let i = 0; i < VOTERS_KEYS.length; i++) {
     const mintTx = await mintingContract.mint(VOTERS_KEYS[i], MINT_VALUE);
     const mintTxReceipt = await mintTx.wait();
