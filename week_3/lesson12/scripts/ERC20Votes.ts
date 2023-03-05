@@ -3,21 +3,6 @@ import { ethers } from "hardhat";
 
 const MINT_VALUE = ethers.utils.parseEther("10");
 
-// “TokenizedBallot.sol” within your group to
-// give voting tokens,
-// delegating voting power,
-// casting votes,
-// checking vote power and
-// querying results
-
-// TODO:
-// 1. Write scripts/DeployERC20Votes.ts; deploy ERC20Votes - August
-// 2. Write scripts/GiveTokens.ts; allots tokens to every account - August
-// 3. Write scripts/DeployTokenizeBallot.ts; deploy tokenizedBallot - August
-// 4. Write scripts/Delegate.ts; accepts an account address as argument on command line
-// 5. scripts/CastVotes.ts
-// 6. scripts/QueryResults.ts
-
 async function main() {
   //Deploy contract
   const [deployer, account1, account2] = await ethers.getSigners();
