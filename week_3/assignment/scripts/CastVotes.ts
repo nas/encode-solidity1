@@ -3,51 +3,68 @@ import { Ballot__factory, MyToken__factory } from "../typechain-types";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-// RUN: yarn hardhat run scripts/CastVotes.ts
+// RUN: yarn hardhat run scripts/CastVotes.ts 0 5
 
 async function main() {
-    const privateWalletKey = process.env.PRIVATE_KEY;
+  const args = process.argv;
+  const proposalAndVote = args.slice(2);
 
-    if (!privateWalletKey || privateWalletKey?.length <= 0)
-        throw new Error("Missing env: Private key");
-
-    const provider = new ethers.providers.EtherscanProvider(
-        "goerli",
-        process.env.ETHERSCAN_API_KEY
+  if (proposalAndVote.length < 2) {
+    throw new Error(
+      "You must provide proposal array element number and the number of votes"
     );
-    const currentBlock = await provider.getBlock("latest")
-    console.log(`Current block is ${currentBlock.number}`);
+  }
 
-    const wallet = new ethers.Wallet(privateWalletKey);
-    console.log(`Connected to the wallet address ${wallet.address}`);
+  const [proposal, vote] = proposalAndVote;
 
-    const signer = wallet.connect(provider);
+  const privateWalletKey = process.env.PRIVATE_KEY;
 
-    const contractFactory = new MyToken__factory(signer);
-    const contract = await contractFactory.attach(process.env.CONTRACT_ADDRESS as string);
+  if (!privateWalletKey || privateWalletKey?.length <= 0)
+    throw new Error("Missing env: Private key");
 
-    let votePowerSigner = await contract.getVotes(signer.address);
+  const provider = new ethers.providers.EtherscanProvider(
+    "goerli",
+    process.env.ETHERSCAN_API_KEY
+  );
+  const currentBlock = await provider.getBlock("latest");
+  console.log(`Current block is ${currentBlock.number}`);
 
-    // Check the historic voting power
-    votePowerSigner = await contract.getPastVotes(signer.address, currentBlock.number - 1);
-    console.log(
-        `Account 1 had a vote power of 
+  const wallet = new ethers.Wallet(privateWalletKey);
+  console.log(`Connected to the wallet address ${wallet.address}`);
+
+  const signer = wallet.connect(provider);
+
+  const contractFactory = new MyToken__factory(signer);
+  const contract = await contractFactory.attach(
+    process.env.CONTRACT_ADDRESS as string
+  );
+
+  let votePowerSigner = await contract.getVotes(signer.address);
+
+  // Check the historic voting power
+  votePowerSigner = await contract.getPastVotes(
+    signer.address,
+    currentBlock.number - 1
+  );
+  console.log(
+    `Account 1 had a vote power of 
            ${ethers.utils.formatEther(votePowerSigner)} units
-           at block ${currentBlock.number - 1}`);
+           at block ${currentBlock.number - 1}`
+  );
 
-    votePowerSigner = await contract.getPastVotes(signer.address, currentBlock.number - 2);
-    console.log(
-        `Account 1 had a vote power of 
-           ${ethers.utils.formatEther(votePowerSigner)} units
-           at block ${currentBlock.number - 2}`);
+  // Attach to existing contract and instantiates it
+  const ballotContractFactory = new Ballot__factory(signer);
+  const ballotContract = await ballotContractFactory.attach(
+    process.env.TOKENIZED_BALLOT_CONTRACT_ADDRESS as string
+  );
+  await ballotContract.vote(proposal, ethers.utils.parseUnits(vote));
 
-    // Attach to existing contract and instantiates it
-    const ballotContractFactory = new Ballot__factory(signer);
-    const ballotContract = ballotContractFactory.attach(process.env.CONTRACT_ADDRESS as string);
-    await ballotContract.vote(0);
+  console.log(
+    `Successfully voted:  ${vote} ether equivalent votes to the proposal at position ${proposal}`
+  );
 }
 
 main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-})
+  console.error(error);
+  process.exitCode = 1;
+});
