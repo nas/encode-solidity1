@@ -13,7 +13,7 @@ function convertStringArrayToBytes32(array: string[]) {
 async function main() {
   const args = process.argv;
   const proposals = args.slice(2);
-  const targetBlockNo = 8601487; // block number at which the ERC20 token was deployed
+  const targetBlockNo = 8606287; // block number at which the ERC20 token was deployed
 
   const privateWalletKey = process.env.PRIVATE_KEY;
 
@@ -30,16 +30,16 @@ async function main() {
   console.log(`Connected to the wallet address ${wallet.address}`);
 
   const signer = wallet.connect(provider);
-  const balance = await signer.getBalance();
 
   console.log("Deploying TokenisedBallot contract");
   const tokenizedBallotContractFactory = new Ballot__factory(signer);
   const tokenizedBallotContract = await tokenizedBallotContractFactory.deploy(
     convertStringArrayToBytes32(proposals),
-    process.env.CONTRACT as string,
+    process.env.CONTRACT_ADDRESS as string,
     targetBlockNo
   );
-  const deployTxReceipt = await tokenizedBallotContract.deployTransaction.wait();
+  const deployTxReceipt =
+    await tokenizedBallotContract.deployTransaction.wait();
 
   console.log(
     `The tokenized ballot Contract was deployed at the address ${tokenizedBallotContract.address}`
