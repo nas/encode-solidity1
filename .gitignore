@@ -1,5 +1,6 @@
 **/node_modules
 *.env
 **/cache
+**/dist
 
 week_2/assignment/dotenv
