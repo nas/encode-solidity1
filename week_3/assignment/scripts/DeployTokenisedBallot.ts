@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers } from "hardhat";
 import { Ballot, Ballot__factory, MyToken__factory } from "../typechain-types";
 import * as dotenv from "dotenv";
 import { tokenizedBalletSol } from "../typechain-types/factories/contracts";
@@ -38,7 +38,7 @@ async function main() {
     convertStringArrayToBytes32(proposals),
     process.env.CONTRACT as string,
     targetBlockNo
-    );
+  );
   const deployTxReceipt = await tokenizedBallotContract.deployTransaction.wait();
 
   console.log(
