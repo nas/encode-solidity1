@@ -14,8 +14,17 @@ contract MyToken is ERC20, AccessControl, ERC20Permit, ERC20Votes {
         _grantRole(MINTER_ROLE, msg.sender);
     }
 
+    // Create a minting event
+    event Minting(
+        address indexed _from,
+        address indexed _to,
+        uint amount,
+        bytes32 message
+    );
+
     function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
         _mint(to, amount);
+        emit Minting(msg.sender, to, amount, "We are logging a thing");
     }
 
     // The following functions are overrides required by Solidity.

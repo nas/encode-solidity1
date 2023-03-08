@@ -54,6 +54,28 @@ async function main() {
     )}`
   );
 
+  // playing with parsing event logs
+  console.log({mintTxReceipt2})
+  console.log({logtopic0: mintTxReceipt2.logs[0].topics})
+  console.log({logtopic1:mintTxReceipt2.logs[1].topics})
+  console.log({log:mintTxReceipt2.logs})
+
+  // emitted events are stored in the topics of the logs
+  // multiple events are stored as arrays
+  // pick the right one use the event signaure as below
+  const signature = ethers.utils.toUtf8Bytes("Minting(address,address,uint256,bytes32)")
+  const hash = ethers.utils.keccak256(signature)
+  console.log(hash)
+  const dataFortheAboveTopicHash = '0x0000000000000000000000000000000000000000000000008ac7230489e80000576520617265206c6f6767696e672061207468696e6700000000000000000000'
+
+  const data = ethers.utils.defaultAbiCoder.decode(['uint256', 'bytes32'], dataFortheAboveTopicHash)
+  console.log("DATA", data)
+  console.log(ethers.utils.parseBytes32String(data[1]))
+
+  contract.on("Minting", (from, to, amount, message) => {
+    console.log(`From: ${from} => To: ${to} : ${amount}, ${message}`)
+  })
+
   const delegateTx = await contract
     .connect(account1)
     .delegate(account1.address);
@@ -78,6 +100,7 @@ async function main() {
     )} ETH)`
   );
   //what else should happen
+
 }
 
 main().catch((error) => {
