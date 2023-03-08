@@ -1,0 +1,6 @@
+<div class="mx-4">
+  <h1>Hello World</h1>
+  <p *ngIf="blockNumber && blockNumber > 0">Connected to Goerli on {{blockNumber}}</p>
+  <button type="button" class="btn btn-primary btn-lg px-4 gap-3" (click)="syncBlock()">Sync</button>
+  <button type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3" (click)="clear()">Clear</button>
+</div>
