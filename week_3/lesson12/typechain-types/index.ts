@@ -30,3 +30,7 @@ export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
 export type { MyToken } from "./contracts/ERC20Votes.sol/MyToken";
 export { MyToken__factory } from "./factories/contracts/ERC20Votes.sol/MyToken__factory";
+export type { Ballot } from "./contracts/TokenizedBallet.sol/Ballot";
+export { Ballot__factory } from "./factories/contracts/TokenizedBallet.sol/Ballot__factory";
+export type { IMyToken } from "./contracts/TokenizedBallet.sol/IMyToken";
+export { IMyToken__factory } from "./factories/contracts/TokenizedBallet.sol/IMyToken__factory";

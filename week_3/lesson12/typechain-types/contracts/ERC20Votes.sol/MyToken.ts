@@ -325,6 +325,7 @@ export interface MyTokenInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "DelegateChanged(address,address,address)": EventFragment;
     "DelegateVotesChanged(address,uint256,uint256)": EventFragment;
+    "Minting(address,address,uint256,bytes32)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
@@ -334,6 +335,7 @@ export interface MyTokenInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DelegateChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DelegateVotesChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Minting"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
@@ -376,6 +378,19 @@ export type DelegateVotesChangedEvent = TypedEvent<
 
 export type DelegateVotesChangedEventFilter =
   TypedEventFilter<DelegateVotesChangedEvent>;
+
+export interface MintingEventObject {
+  _from: string;
+  _to: string;
+  amount: BigNumber;
+  message: string;
+}
+export type MintingEvent = TypedEvent<
+  [string, string, BigNumber, string],
+  MintingEventObject
+>;
+
+export type MintingEventFilter = TypedEventFilter<MintingEvent>;
 
 export interface RoleAdminChangedEventObject {
   role: string;
@@ -966,6 +981,19 @@ export interface MyToken extends BaseContract {
       previousBalance?: null,
       newBalance?: null
     ): DelegateVotesChangedEventFilter;
+
+    "Minting(address,address,uint256,bytes32)"(
+      _from?: PromiseOrValue<string> | null,
+      _to?: PromiseOrValue<string> | null,
+      amount?: null,
+      message?: null
+    ): MintingEventFilter;
+    Minting(
+      _from?: PromiseOrValue<string> | null,
+      _to?: PromiseOrValue<string> | null,
+      amount?: null,
+      message?: null
+    ): MintingEventFilter;
 
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: PromiseOrValue<BytesLike> | null,
