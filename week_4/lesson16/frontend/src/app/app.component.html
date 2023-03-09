@@ -1,0 +1,28 @@
+<div class="mx-4">
+  <h1>Hello World</h1>
+  <div *ngIf="blockNumber && blockNumber > 0">
+  <p>Connected to Goerli on {{blockNumber}}</p>
+  <button type="button" class="btn btn-success btn-lg px-4 gap-3 m-2" (click)="createWallet()">{{userWallet ? "Createa another": "Connect"}} Wallet</button>
+  <div *ngIf="userWallet" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <p>{{userWallet.address}}</p>
+      <p>{{userEthBalance}} ETH</p>
+
+      <p>{{tokenContractAddress}}</p>
+      <p>{{userTokenBalance}} ETH</p>
+      <p>{{tokenTotalSupply}} ETH</p>
+    </div>
+  </div>
+
+  </div>
+  <br/>
+  <button type="button" class="btn btn-primary btn-lg px-4 gap-3 m-2" (click)="syncBlock()">Sync</button>
+  <button type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3 m-2" (click)="clear()">Clear</button>
+  <br/>
+  <p>Amount:</p>
+  <input #mintAmount type="number" min="0" max="10" class="input" />
+  <button type="button" class="btn btn-danger btn-lg px-4 gap-3 m-2" (click)="requestTokens(mintAmount.value)">Request Tokens</button>
+</div>
