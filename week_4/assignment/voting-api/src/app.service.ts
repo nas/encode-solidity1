@@ -48,7 +48,7 @@ export class AppService {
           proposal.voteCount
         } Votes on proposal: ${ethers.utils.parseBytes32String(proposal.name)}`
       );
-      proposals.push(ethers.utils.parseBytes32String(proposal));
+      proposals.push(ethers.utils.parseBytes32String(proposal.name));
       await sleep(500); // to avoid hitting api limits
     }
   
