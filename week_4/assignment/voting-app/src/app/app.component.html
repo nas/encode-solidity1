@@ -1,1 +1,88 @@
-<h1>Voting app frontend</h1>
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Voting app</h2>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span> Request voting</span>
+        </h4>
+        <form class="card">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Wallet address">
+            <button type="submit" class="btn btn-primary">Request</button>
+          </div>
+        </form>
+
+        <hr class="my-4">
+
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span> Delegate voting</span>
+        </h4>
+        <form class="card">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Wallet address">
+            <button type="submit" class="btn btn-primary">Delegate</button>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Ballots</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Ballots</th>
+              <th scope="col">Votes</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr>
+              <th scope="row">Option 1</th>
+              <td>15</td>
+            </tr>
+            <tr>
+              <th scope="row">Option 2</th>
+              <td>28</td>
+            </tr>
+            <tr>
+              <th scope="row">Option 3</th>
+              <td>8</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <form>
+
+          <h4 class="mb-3">Voting</h4>
+
+          <div class="my-3">
+            <div class="form-check form-check-inline">
+              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
+              <label class="form-check-label" for="credit">Option 1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+              <label class="form-check-label" for="debit">Option 2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
+              <label class="form-check-label" for="paypal">Option 3</label>
+            </div>
+          </div>
+
+          <form class="card ">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Wallet address">
+              <button type="submit" class="btn btn-primary">Vote</button>
+            </div>
+          </form>
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+</div>
