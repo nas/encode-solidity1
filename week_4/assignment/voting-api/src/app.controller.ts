@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Query, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Patch, Param } from '@nestjs/common';
 import { AppService } from './app.service';
+import { RequestVotingDto } from './dtos/RequestVoting.dto';
 
 
 @Controller()
@@ -13,10 +14,9 @@ export class AppController {
 
   @Patch("request-voting")
   async requestVoting(
-    @Query('address') address: string,
-    @Query('value') value: string
+    @Body() body: RequestVotingDto
   ) {
-    return await this.appService.requestVoting(address, value)
+    return await this.appService.requestVoting(body.address, body.amount)
   }
 
   @Get("get-balance")

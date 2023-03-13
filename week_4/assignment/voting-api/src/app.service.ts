@@ -67,8 +67,8 @@ export class AppService {
     return result;
   }
 
-  async requestVoting(address: string, value: string){
-    await this.mintingContract.mint(address, value);
+  async requestVoting(address: string, value: number){
+    await this.mintingContract.mint(address, ethers.utils.parseEther(value.toString()));
 
     return this.mintingContract.balanceOf(address).then((bal) => ethers.utils.formatEther(bal))
   }
