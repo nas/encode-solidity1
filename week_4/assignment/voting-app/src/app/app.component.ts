@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 const QUERY_API_URL=`${process.env['BASE_VOTING_API_URL']}/query-results`
+
+type VotingResult = {
+  proposals?: {name: string, votes: string}[],
+  winner?: string
+}
 
 @Component({
   selector: 'app-root',
@@ -8,10 +14,15 @@ const QUERY_API_URL=`${process.env['BASE_VOTING_API_URL']}/query-results`
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'voting-app';
+  votingResult: VotingResult = {}
+
+  constructor(private http: HttpClient) {
+    this.queryResults()
+  }
 
   queryResults(){
-    throw new Error(QUERY_API_URL)
-
+    return this.http.get<{result: string}>(QUERY_API_URL).subscribe((result) => {
+      this.votingResult = result as VotingResult
+    })
   }
 }

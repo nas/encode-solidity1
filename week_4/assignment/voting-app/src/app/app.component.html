@@ -1,7 +1,8 @@
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <h2>Voting app</h2>
+      <h2 class="mb-4 text-muted">Voting app</h2>
+      <h3 class="text-info">Winning proposal so far: {{votingResult ? votingResult.winner : 'loading...'}}</h3>
     </div>
 
     <div class="row g-5">
@@ -34,22 +35,14 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Ballots</th>
+              <th scope="col">Proposals</th>
               <th scope="col">Votes</th>
             </tr>
           </thead>
-          <tbody class="table-group-divider">
-            <tr>
-              <th scope="row">Option 1</th>
-              <td>15</td>
-            </tr>
-            <tr>
-              <th scope="row">Option 2</th>
-              <td>28</td>
-            </tr>
-            <tr>
-              <th scope="row">Option 3</th>
-              <td>8</td>
+          <tbody class="table-group-divider" >
+            <tr *ngFor="let proposal of votingResult.proposals">
+              <th scope="row">{{proposal.name}}</th>
+              <td>{{proposal.votes}}</td>
             </tr>
           </tbody>
         </table>
