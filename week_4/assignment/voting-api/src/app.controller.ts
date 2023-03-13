@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 
@@ -9,6 +9,21 @@ export class AppController {
   @Get("query-results")
   async queryResults() {
       return await this.appService.queryResults();
+  }
+
+  @Get("request-voting")
+  async requestVoting(
+    @Query('address') address: string,
+    @Query('value') value: string
+  ) {
+    return await this.appService.requestVoting(address, value)
+  }
+
+  @Get("get-balance")
+  async getBalance(
+    @Query('address') address: string,
+  ) {
+    return await this.appService.getBalance(address)
   }
 }
 
