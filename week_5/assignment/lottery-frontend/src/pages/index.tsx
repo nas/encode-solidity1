@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { Button, Col, InputGroup, Container, Form, Nav, Navbar, Row, Table } from 'react-bootstrap';
+import { Wallet } from '@/components/common/wallet';
 
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -22,7 +21,7 @@ export default function Home() {
               <Nav.Link href="/account">Account</Nav.Link>
             </Nav>
             <Nav >
-              <Button>Connect Wallet</Button>
+              <Wallet/>
             </Nav>
           </Container>
         </Navbar>
@@ -45,7 +44,6 @@ export default function Home() {
           </Form>
 
         </Container>
-
       </main>
     </>
   )
