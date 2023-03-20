@@ -1,3 +1,8 @@
+// THIS SCRIPT IS NOT USED CURRENTLY. WE INSTEAD USED scripts/deploy.ts to 
+// DEPLOY THE MAIN CONTRACT WHICH ALSO DEPLOYS THE LOTTERY_TOKEN
+// DIDN'T HAVE TIME TO COMBINE BOTH AND HAVE A DEPLOY SCRIPT 
+// SO MERGED THIS AS WELL.
+
 import { ethers } from "hardhat";
 import { LotteryToken__factory } from "../typechain-types";
 import * as dotenv from "dotenv";
