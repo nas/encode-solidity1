@@ -21,6 +21,6 @@
     "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
     "typescript": "5.0.2",
-    "wagmi": "^0.12.2"
+    "wagmi": "^0.10.3"
   }
 }

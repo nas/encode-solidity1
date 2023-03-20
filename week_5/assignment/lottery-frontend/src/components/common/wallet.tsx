@@ -2,8 +2,6 @@ import { Button } from 'react-bootstrap';
 import { useBalance } from 'wagmi'
 import { useNetwork } from 'wagmi'
 
-
-
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
  
